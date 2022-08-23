@@ -1,0 +1,182 @@
+﻿html { background-color: #ddd }
+
+a {color: inherit !important}
+
+/* fix rounding error missing a pixel */
+.columns .column.is-8 {width: 66.67% !important}
+
+.clock-bg {
+    background: url('photo-1521459467264-802e2ef3141f.jpg');
+    background-size: cover;
+}
+
+/* TODO scale with size: clock, clock shadows, marks*/
+#clock {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.clock {
+    width: 258px; /*240px contents*/
+    height: 258px;
+    margin: auto;
+    background: #fff url('photo-1601662528567-526cd06f6582.jpg') center center;
+    border: 9px solid #000;
+    border-radius: 50%;
+    box-shadow: inset 40px 40px 90px rgba(0,0,0,.2), inset 10px 10px 30px rgba(0,0,0,.5), 20px 20px 30px rgba(0,0,0,.4), 40px 40px 60px rgba(0,0,0,.4);
+    position: relative;
+    z-index: 1;
+}
+
+.clock:before {
+    content: '';
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    display: block;
+    background: transparent;
+    border: 6px solid white;
+}
+
+/* highlight at top left of black outline */
+.clock:after {
+    content: '';
+    width: 252px;
+    height: 252px;
+    border-radius: 50%;
+    display: block;
+    background: transparent;
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    box-shadow: -3px -3px 9px rgba(255,255,255,.8);
+}
+
+.clock > .marks {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.clock > .marks > .mark {
+    position: absolute;
+    height: 86.25%; /*86.25% = 207px in 240px*/
+    width: 1.25%; /*1.25% = 3px in 240px container*/
+    top: calc(50% - calc(86.25% / 2));
+    left: calc(50% - calc(1.25% / 2));
+    background: transparent;
+    border-top: 21px solid #000; /*8.75% = 21px in 240px*/
+    border-bottom: 21px solid #000;
+}
+
+.clock > .marks > .mark.r0 {transform: rotate(0deg)}
+.clock > .marks > .mark.r30 {transform: rotate(30deg)}
+.clock > .marks > .mark.r60 {transform: rotate(60deg)}
+.clock > .marks > .mark.r90 {transform: rotate(90deg)}
+.clock > .marks > .mark.r120 {transform: rotate(120deg)}
+.clock > .marks > .mark.r150 {transform: rotate(150deg)}
+
+.clock > .label {
+    position: absolute;
+    top: -25%;
+    left: 50%;
+    transform: translate(-50%, 0) scale(3.75%);
+}
+
+.clock > .label:after {
+    content: 'FSHARP';
+    font-size: 240px;
+    font-family: 'Times New Roman';
+    line-height: 1em;
+}
+
+.clock > .hands {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    /*because 0 rotation is 3 oclock*/
+    /*transform: rotate(-90deg);*/
+}
+
+.clock > .hands > .hand {
+    background: #000;
+    position: absolute;
+    z-index: 2;
+    -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+}
+
+/* testing
+@keyframes rotate {100% {transform: rotate(360deg)}}
+.clock:hover > .hands > .hand {*/
+/*.clock > .hands > .hand.hours {*/
+    /*animation: rotate 12s steps(360);
+}*/
+
+.clock > .hands > .hand.hours {
+    height: 31.25%; /*31.25% = 75px in 240px*/
+    width: 2.5%; /*2.5% = 6px in 240px*/
+    top: calc(50% - 31.25% + 5%); /*5% of parent = offset*/
+    left: calc(50% - calc(2.5% / 2));
+    transform-origin: 50% calc(100% - 16%); /*31.25% * 16% = 5% of parent*/
+    border-top-right-radius: 20%;
+    border-bottom-right-radius: 20%;
+    box-shadow: -10px 0px 10px rgba(0,0,0,.4);
+}
+
+
+.clock > .hands > .hand.minutes {
+    height: 50%;
+    width: 1.25%;
+    top: 5%; /*offset height 50% of parent * 10% of self */
+    left: calc(50% - calc(1.25%/2));
+    transform-origin: 50% calc(100% - 10%);
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+    box-shadow: -10px 10px 10px rgba(0,0,0,.4);
+}
+
+.clock > .hands > .hand.seconds {
+    height: 43.75%;
+    width: 0.625%;
+    top: calc(50% - 43.75% + 5.03125%);
+    left: calc(50% - calc(0.625% / 2));
+    transform-origin: 50% calc(100% - 11.5%);
+    box-shadow: -10px -10px 10px rgba(0,0,0,.4);
+}
+
+.clock.no-transitions > .hands > .hand:is(.minutes,.seconds) {
+    transition: none !important;
+}
+
+.clock > .hands > .hand:is(.minutes,.seconds) {
+    transition: transform 0.3s cubic-bezier(.4,1.8,.45,.50);
+}
+
+.clock > .hand-pin {
+    background: #000;
+    width: 6.25%; /*6.25% = 15px in 240px container*/
+    height: 6.25%;
+    border-radius: 50%;
+    z-index: 3;
+    position: absolute;
+    top: calc(50% - calc(6.25% / 2));
+    left: calc(50% - calc(6.25% / 2));
+    box-shadow: 10px 10px 10px rgba(0,0,0,.4);
+}
+
+.clock > .hand-pin:after {
+    content: '';
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: 2;
+    position: absolute;
+    box-shadow: 5px 5px 5px rgba(0,0,0,.4);
+}
+

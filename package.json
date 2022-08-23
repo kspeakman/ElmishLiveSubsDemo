@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.2",
+    "bulma": "^0.9.4",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "source-map-loader": "^4.0.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.0"
+  },
+  "scripts": {
+    "postinstall": "dotnet tool restore",
+    "clean": "dotnet fable clean ./src/Demo -o ./fable_output/ --yes",
+    "start": "npm install && npm run clean && dotnet fable watch ./src/Demo -o ./fable_output -s --run webpack-dev-server",
+    "build": "npm install && npm run clean && dotnet fable ./src/Demo -o ./fable_output -s --run webpack"
+  }
+}

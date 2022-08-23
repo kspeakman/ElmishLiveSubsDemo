@@ -1,0 +1,16 @@
+.fable/
+.fake/
+.farmer/
+.idea/
+.ionide/
+.vs/
+deploy/
+dist/
+publish/
+obj/
+bin/
+packages/
+paket-files/
+node_modules/
+fable_output/**/*
+!fable_output/anchor.txt
