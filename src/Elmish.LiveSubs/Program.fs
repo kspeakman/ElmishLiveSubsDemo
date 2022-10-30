@@ -66,7 +66,7 @@ module Program =
             let liveSubs = subscribe userModel
             let subCmd = calcFxIfChanged subs liveSubs
             { Subs = subs; UserModel = userModel},
-            Cmd.batch [Cmd.map UserMsg userCmd; subCmd]
+            Cmd.batch [subCmd; Cmd.map UserMsg userCmd]
 
         let updateIfChanged subscribe model (userModel, userCmd) =
             if model.UserModel = userModel then
